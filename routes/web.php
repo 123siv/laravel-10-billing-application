@@ -20,9 +20,6 @@ use App\Http\Controllers\SalesController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::resource('products', ProductController::class);
-
-// web.php (routes file)
 
 Route::get('/home', function () {
     return view('home');

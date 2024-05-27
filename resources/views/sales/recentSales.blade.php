@@ -13,7 +13,7 @@
                     <input type="date" class="form-control" id="toDate" placeholder="To Date">
                 </div>
                 <div class="col-md-2">
-                    <button class="btn btn-primary" id="filterButton">Filter</button>
+                    {{-- <button class="btn btn-primary" id="filterButton">Filter</button> --}}
                 </div>
             </div>
             <table class="table table-borderless">

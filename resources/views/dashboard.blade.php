@@ -3,7 +3,6 @@
 
   <section class="section dashboard">
     <div class="row">
-
       <!-- Left side columns -->
       <div class="col-lg-8">
         <div class="row">
@@ -36,7 +35,6 @@
         @include('chart.salesChart')
         <!-- End Website Traffic -->
       </div><!-- End Right side columns -->
-
     </div>
   </section>
   @endsection

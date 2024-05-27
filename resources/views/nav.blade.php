@@ -17,13 +17,13 @@
       <li class="nav-item">
         <a class="nav-link" href="{{ route('home') }}">
           <i class="ri-home-3-line"></i>
-          <span>Home</span>
+          <span>Master</span>
         </a>
       </li><!-- End Dashboard Nav -->
       <li class="nav-item">
         <a class="nav-link" href="{{ route('products.index') }}">
           <i class="ri-home-3-line"></i>
-          <span>Products</span>
+          <span>Report</span>
         </a>
       </li><!-- End Dashboard Nav -->
     </ul>

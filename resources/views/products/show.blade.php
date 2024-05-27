@@ -7,7 +7,7 @@
 
 <div class="card recent-sales overflow-auto">
     <div class="card-body">
-        <h5 class="card-title">Products</h5>
+        <h5 class="card-title">Sales Repoert</h5>
         <div class="filter col-md-3">
             <label for="product-select">Select Product:</label>
             <select id="product-select" class="form-control">
