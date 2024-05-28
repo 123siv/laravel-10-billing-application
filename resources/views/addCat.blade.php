@@ -12,7 +12,8 @@
                         @csrf
                         <div class="col-12">
                             <label for="catName" class="form-label">Category Name</label>
-                            <input type="text" class="form-control" id="catName" name="catName" value="{{ old('catName') }}">
+                            <input type="text" class="form-control" id="catName" name="catName"
+                                value="{{ old('catName') }}">
                             <div id="catNameError" class="invalid-feedback"></div>
                         </div>
                 </div>
@@ -34,8 +35,7 @@
         $('#saveCatBtn').on('click', function() {
             let form = document.getElementById('addCatForm');
             let formData = new FormData(form);
-
-            axios.post('{{ route("storeCat") }}', formData)
+            axios.post('{{ route('storeCat') }}', formData)
                 .then(function(response) {
                     // Handle success
                     console.log(response.data);

@@ -1250,3 +1250,8 @@ h6 {
 .suggestions-list li:hover {
   background-color: #f0f0f0;
 }
+.sidebar.nav-item.active.nav-link {
+  color: #fff;
+  background-color: #007bff;
+  border-radius: 0.25rem;
+}

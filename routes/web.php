@@ -35,6 +35,10 @@ Route::delete('/delete-product/{id}', [ProductController::class, 'destroy'])->na
 Route::get('/getProductData', [ProductController::class, 'getProductData'])->name('getProductData');
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/sales/product/{productId}', [ProductController::class, 'getSalesCategories']);
+Route::get('/singleProduct/{id}', [ProductController::class, 'showSingleproduct']); // For fetching product details
+Route::put('/singleProduct/{id}', [ProductController::class, 'update']);
+
+
 
 Route::get('/products', function () {
     return view('products.show');
@@ -43,6 +47,7 @@ Route::get('/products', function () {
 //category
 Route::post('/categories', [CategoryController::class, 'store'])->name('storeCat');
 Route::delete('/delete-category/{id}', [CategoryController::class, 'destroy'])->name('deleteCategory');
+Route::put('/categories/{id}', [CategoryController::class, 'update']);
 
 //bills
 Route::post('/storeBill', [BillController::class, 'store'])->name('storeBill');

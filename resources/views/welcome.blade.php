@@ -2,12 +2,6 @@
 @include('nav')
 @include('dashboard')
 
-
-  
-    
-    @yield('content')
-    {{-- body and content comes here --}}
-
-  
-
+@yield('content')
+{{-- body and content comes here --}}
 @include('footer')

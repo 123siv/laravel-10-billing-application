@@ -26,10 +26,12 @@
                         </div>
                         <div class="col-md-6 ">
                             <label for="productName" class="form-label">Product Name</label>
-                            <select class="form-select @error('productName') is-invalid @enderror" id="productName" name="productName">
+                            <select class="form-select @error('productName') is-invalid @enderror" id="productName"
+                                name="productName">
                                 <option value="">Select Name</option>
                                 @foreach ($products as $product)
-                                    <option class="text-capitalize" value="{{ $product->id }}" {{ old('productName') == $product->id ? 'selected' : '' }}>
+                                    <option class="text-capitalize" value="{{ $product->id }}"
+                                        {{ old('productName') == $product->id ? 'selected' : '' }}>
                                         {{ $product->name }}
                                     </option>
                                 @endforeach
@@ -40,7 +42,6 @@
                             <label for="productId" class="form-label">Product Code</label>
                             <input type="number" class="form-control" id="productId" name="productId">
                         </div>
-                        
                         <div class="col-md-6 ">
                             <label for="productCat" class="form-label">Category</label>
                             <select class="form-select" id="productCat" name="productCat">
@@ -88,18 +89,18 @@
             var total = isNaN(mrp) || isNaN(quantity) ? 0 : (mrp * quantity).toFixed(2);
             $('#total').val(total);
         }
-
         // Event listener for MRP and quantity input fields
         $('#productMrp, #productQuantity').on('input', calculateTotal);
-
         // Event listener for product name change
         $('#productName').change(function() {
             var product_id = $(this).val();
             console.log(product_id);
             $.ajax({
-                url: '{{ route("getProductName") }}',
+                url: '{{ route('getProductName') }}',
                 method: 'GET',
-                data: {product_id: product_id},
+                data: {
+                    product_id: product_id
+                },
                 success: function(response) {
                     $('#productId').val(response.product_id);
                 },
@@ -108,14 +109,13 @@
                 }
             });
         });
-
         // Event listener for save button
         $('#saveBillBtn').click(function() {
             // Reset previous error messages
             $('.invalid-feedback').html('');
             // Submit the form using AJAX
             $.ajax({
-                url: '{{ route("storeBill") }}',
+                url: '{{ route('storeBill') }}',
                 method: 'POST',
                 data: $('#addBillForm').serialize(),
                 success: function(response) {
