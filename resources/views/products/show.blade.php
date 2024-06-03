@@ -2,7 +2,8 @@
 @include('nav')
 
 @php
-    $products = \App\Models\Product::all();
+    $userId = Auth::id();
+    $products = \App\Models\Product::where('user_id', $userId)->get();
 @endphp
 
 <div class="container">

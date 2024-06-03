@@ -9,8 +9,9 @@
 @endif
 
 @php
-    $categories = \App\Models\Category::all();
-    $products = \App\Models\Product::all();
+$userId = Auth::id();
+    $categories = \App\Models\Category::where('user_id', $userId)->get();
+    $products = \App\Models\Product::where('user_id', $userId)->get();
 @endphp
 
 <div class="row">
@@ -87,7 +88,7 @@
                                 onclick="deleteCategory({{ $category->id }})"></button>
                             <button class="btn btn-outline-primary btn-sm ri-edit-2-line"
                                 onclick="editCategory({{ $category->id }}, '{{ $category->name }}')"></button>
-                            &nbsp;{{ $category->name }}
+                            &nbsp;<strong>{{ $category->name }}</strong>
                         </li>
                     @endforeach
                 </ul>
@@ -99,7 +100,7 @@
                                 onclick="deleteProduct({{ $product->id }})"></button>
                             <button class="btn btn-outline-primary btn-sm ri-edit-2-line"
                                 onclick="editProduct({{ $product->id }})"></button>
-                            &nbsp;{{ $product->name }}
+                            &nbsp;<strong>{{ $product->name }}</strong>-({{ $product->code }})
                         </li>
                     @endforeach
                 </ul>

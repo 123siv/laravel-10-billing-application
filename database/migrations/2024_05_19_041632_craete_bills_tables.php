@@ -13,13 +13,16 @@ return new class extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->integer('billNo');
             $table->string('phone')->nullable();
             $table->string('product_id');
             $table->integer('productMrp');
             $table->integer('productQuantity');
-            $table->string('category');
+            $table->string('salesCategory');
+
             $table->timestamps();
+            
         });
     }
 

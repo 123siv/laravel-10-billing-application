@@ -1,6 +1,6 @@
-<!-- Your HTML Form -->
 @php
-    $products = \App\Models\Product::all();
+    $userId = Auth::id();
+    $products = \App\Models\Product::where('user_id', $userId)->get();
 @endphp
 
 <div class="modal fade" id="addBillModal" tabindex="-1" aria-labelledby="addBillModalLabel" aria-hidden="true">
@@ -26,8 +26,7 @@
                         </div>
                         <div class="col-md-6 ">
                             <label for="productName" class="form-label">Product Name</label>
-                            <select class="form-select @error('productName') is-invalid @enderror" id="productName"
-                                name="productName">
+                            <select class="form-select @error('productName') is-invalid @enderror" id="productName" name="productName">
                                 <option value="">Select Name</option>
                                 @foreach ($products as $product)
                                     <option class="text-capitalize" value="{{ $product->id }}"
@@ -78,7 +77,6 @@
     </div>
 </div>
 
-<!-- JavaScript -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
@@ -89,12 +87,13 @@
             var total = isNaN(mrp) || isNaN(quantity) ? 0 : (mrp * quantity).toFixed(2);
             $('#total').val(total);
         }
+
         // Event listener for MRP and quantity input fields
         $('#productMrp, #productQuantity').on('input', calculateTotal);
+
         // Event listener for product name change
         $('#productName').change(function() {
             var product_id = $(this).val();
-            console.log(product_id);
             $.ajax({
                 url: '{{ route('getProductName') }}',
                 method: 'GET',
@@ -109,10 +108,12 @@
                 }
             });
         });
+
         // Event listener for save button
         $('#saveBillBtn').click(function() {
             // Reset previous error messages
-            $('.invalid-feedback').html('');
+            $('.invalid-feedback').html('').removeClass('is-invalid');
+
             // Submit the form using AJAX
             $.ajax({
                 url: '{{ route('storeBill') }}',
@@ -122,16 +123,19 @@
                     // Handle success
                     console.log(response);
                     $('#addBillModal').modal('hide');
-                    //alert('Bill added successfully!');
-                    location.reload();
+                    location.reload(); // Reload the page or update the bills table dynamically
                 },
                 error: function(xhr) {
                     // Handle errors
-                    console.log(xhr.responseJSON.errors);
-                    $.each(xhr.responseJSON.errors, function(key, value) {
-                        $('#' + key + 'Error').html(value[0]);
-                        $('#' + key).addClass('is-invalid');
-                    });
+                    if (xhr.status === 422) {
+                        var errors = xhr.responseJSON.errors;
+                        $.each(errors, function(key, value) {
+                            $('#' + key + 'Error').html(value[0]).addClass('is-invalid');
+                            $('#' + key).addClass('is-invalid');
+                        });
+                    } else {
+                        console.log(xhr.responseText);
+                    }
                 }
             });
         });
